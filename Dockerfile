@@ -26,7 +26,8 @@ SHELL ["/bin/bash", "-c"]
 # Install needed development dependencies. If this is a developer_build we don't remove
 # the build-deps after doing a bundle install.
 # Copy Gemfile to container.
-COPY --chown=lobsters:lobsters ./lobsters/Gemfile ./lobsters/Gemfile.lock /lobsters/
+COPY --chown=lobsters:lobsters ./lobsters ./lobsters/Gemfile ./lobsters/Gemfile.lock /lobsters/
+RUN ls -la "lobsters/"
 ARG DEVELOPER_BUILD=false
 RUN set -xe; \
     apk add --no-cache --virtual .build-deps \
@@ -38,15 +39,19 @@ RUN set -xe; \
         linux-headers \
         mariadb-connector-c-dev \
         mariadb-dev \
+	readline-dev \
         sqlite-dev; \
     export PATH=/lobsters/.gem/ruby/2.7.0/bin:$PATH; \
     export SUPATH=$PATH; \
     export GEM_HOME="/lobsters/.gem"; \
     export GEM_PATH="/lobsters/.gem"; \
     export BUNDLE_PATH="/lobsters/.bundle"; \
+    ls -la "/lobsters/"; \
     cd /lobsters; \
+    #su lobsters -c "gem install --default bundler"; \
     su lobsters -c "gem install bundler --user-install"; \
-    su lobsters -c "gem update"; \
+    su lobsters -c "gem update --system"; \
+    su lobsters -c "bundle update --bundler"; \
     su lobsters -c "gem install rake -v 13.0.1"; \
     su lobsters -c "bundle config set no-cach 'true'"; \
     su lobsters -c "bundle install"; \
@@ -81,13 +86,13 @@ ARG VERSION
 
 # Labels / Metadata.
 LABEL \
-    org.opencontainers.image.authors="James Brink <brink.james@gmail.com>" \
+    org.opencontainers.image.authors="Lily Tsai<tslilyai@gmail.com>" \
     org.opencontainers.image.created="${BUILD_DATE}" \
     org.opencontainers.image.description="Lobsters Rails Project" \
     org.opencontainers.image.revision="${VCS_REF}" \
-    org.opencontainers.image.source="https://github.com/utensils/docker-lobsters" \
+    org.opencontainers.image.source="https://github.com/tslilyai/docker-lobsters-edna" \
     org.opencontainers.image.title="lobsters" \
-    org.opencontainers.image.vendor="Utensils" \
+    org.opencontainers.image.vendor="Tslilyai" \
     org.opencontainers.image.version="${VERSION}"
 
 # Set environment variables.

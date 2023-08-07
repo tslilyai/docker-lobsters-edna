@@ -20,7 +20,7 @@ services:
     volumes:
       - 'lobsters_database:/var/lib/mysql'
   app:
-    image: utensils/lobsters:latest
+    image: tslilyai/lobsters-edna:latest
     build:
       context: .
       args:
@@ -38,6 +38,8 @@ services:
       - RAILS_MAX_THREADS=5
     ports:
       - "3000:3000"
+    volumes:
+      - /home/tslilyai/edna_private:/edna_srv
     depends_on:
       database:
         condition: service_healthy
@@ -47,3 +49,4 @@ services:
 volumes:
   lobsters_database:
     driver: local
+

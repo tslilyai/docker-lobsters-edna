@@ -1,10 +1,10 @@
 #!/usr/bin/make -f
 
 SHELL                   := /usr/bin/env bash
-REPO_NAMESPACE          ?= utensils
-REPO_USERNAME           ?= jamesbrink
+REPO_NAMESPACE          ?= tslilyai
+REPO_USERNAME           ?= tslilyai 
 REPO_API_URL            ?= https://hub.docker.com/v2
-IMAGE_NAME              ?= lobsters
+IMAGE_NAME              ?= lobsters-edna
 BASE_IMAGE              ?= ruby:2.7-alpine
 DEVELOPER_BUILD         ?= false
 VERSION                 := $(shell git describe --tags --abbrev=0 2>/dev/null || git rev-parse --abbrev-ref HEAD 2>/dev/null)
