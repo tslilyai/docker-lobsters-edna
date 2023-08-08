@@ -5,8 +5,11 @@
 
 # Install any needed gems. This is useful if you mount
 # the project as a volume to /lobsters
-# bundle install
-
+#bundle update --bundler
+#gem install rake -v 13.0.1
+#bundle config set no-cache 'true'
+#bundle install
+#
 # Used for simple logging purposes.
 timestamp="date +\"%Y-%m-%d %H:%M:%S\""
 alias echo="echo \"$(eval $timestamp) -$@\""

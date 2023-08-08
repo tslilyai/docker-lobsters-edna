@@ -67,7 +67,7 @@ RUN set -xe; \
     su lobsters -c "gem update --system"; \
     su lobsters -c "bundle update --bundler"; \
     su lobsters -c "gem install rake -v 13.0.1"; \
-    su lobsters -c "bundle config set no-cach 'true'"; \
+    su lobsters -c "bundle config set no-cache 'true'"; \
     su lobsters -c "bundle install"; \
     if [ "${DEVELOPER_BUILD,,}" != "true" ]; \
     then \
