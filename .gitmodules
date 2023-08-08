@@ -1,3 +1,3 @@
 [submodule "lobsters"]
 	path = lobsters
-	url = git@github.com:tslilyai/lobsters-edna.git
+	url = https://github.com/tslilyai/lobsters-edna.git
