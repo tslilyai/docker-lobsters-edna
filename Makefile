@@ -24,6 +24,7 @@ init:
 	yes | sudo apt-get remove docker.io docker-doc docker-compose containerd runc; \
     sudo apt update; \
     curl -fsSL https://get.docker.com | sh; \
+	yes | sudo apt install docker-compose; \
     sudo usermod -a -G docker $(USER); \
     newgrp docker
 
