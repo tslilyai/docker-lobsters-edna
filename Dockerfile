@@ -110,7 +110,7 @@ LABEL \
     org.opencontainers.image.version="${VERSION}"
 
 # Set environment variables.
-ENV MARIADB_HOST="mariadb" \
+ENV MARIADB_HOST="database" \
     MARIADB_PORT="3306" \
     MARIADB_PASSWORD="password" \
     MARIADB_USER="root" \
