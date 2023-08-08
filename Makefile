@@ -18,6 +18,10 @@ default: build
 # Build the docker image
 .PHONY: build
 build:
+	for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $(pkg); done
+	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo usermod -a -G docker $(USER)
+	newgrp docker
 	docker build \
 		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
 		--build-arg BUILD_DATE=$(BUILD_DATE) \
