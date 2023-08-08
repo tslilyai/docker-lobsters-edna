@@ -64,6 +64,9 @@ while : ; do
   sleep 300
 done &
 
+# Run the Edna server
+cd /edna_srv/edna_srv; ./run_srv.sh &
+
 # Wait for process to end.
 while kill -0 $pid > /dev/null 2>&1; do
     wait

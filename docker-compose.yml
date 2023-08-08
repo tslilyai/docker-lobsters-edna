@@ -39,7 +39,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - /home/tslilyai/edna_private:/edna_srv
+      - /data/repository:/edna_srv
     depends_on:
       database:
         condition: service_healthy

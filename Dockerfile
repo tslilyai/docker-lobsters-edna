@@ -11,13 +11,25 @@ RUN set -xe; \
 
 # Install needed runtime dependencies.
 RUN set -xe; \
-    chown -R lobsters:lobsters /lobsters; \
+    #chown -R lobsters:lobsters /lobsters; \
     apk add --no-cache --update --virtual .runtime-deps \
         mariadb-connector-c \
         bash \
         nodejs \
         npm \
         sqlite-libs \
+        curl \
+        vim \
+	build-base \
+        gcc \
+        git \
+        gnupg \
+        linux-headers \
+        mariadb-connector-c-dev \
+        mariadb-dev \
+	readline-dev \
+        sqlite-dev \
+        libressl-dev \
         tzdata;
 
 # Change shell to bash
@@ -33,8 +45,10 @@ RUN set -xe; \
     apk add --no-cache --virtual .build-deps \
         build-base \
         curl \
+        vim \
         gcc \
         git \
+        libressl-dev \
         gnupg \
         linux-headers \
         mariadb-connector-c-dev \
@@ -63,18 +77,18 @@ RUN set -xe; \
     mv /lobsters/Gemfile.lock /lobsters/Gemfile.lock.bak;
 
 # Copy lobsters into the container.
-COPY ./lobsters ./docker-assets /lobsters/
+COPY --chown=lobsters:lobsters ./lobsters ./docker-assets /lobsters/
 
 # Set proper permissions and move assets and configs.
 RUN set -xe; \
     mv /lobsters/Gemfile.bak /lobsters/Gemfile; \
     mv /lobsters/Gemfile.lock.bak /lobsters/Gemfile.lock; \
-    chown -R lobsters:lobsters /lobsters; \
+    #chown -R lobsters:lobsters /lobsters; \
     mv /lobsters/docker-entrypoint.sh /usr/local/bin/; \
     chmod 755 /usr/local/bin/docker-entrypoint.sh;
 
 # Drop down to unprivileged users
-USER lobsters
+#USER lobsters
 
 # Set our working directory.
 WORKDIR /lobsters/
