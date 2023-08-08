@@ -13,16 +13,19 @@ BUILD_DATE              := $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 # Default target is to build container
 .PHONY: default
-default: build
+default: init build
+
+.PHONY: init
+init:
+	sudo apt-get remove docker.io docker-doc docker-compose containerd runc; \
+	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin; \
+	sudo usermod -a -G docker $(USER); \
+	newgrp docker
 
 # Build the docker image
 .PHONY: build
 build:
-	for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $(pkg); done
-	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-	sudo usermod -a -G docker $(USER)
-	newgrp docker
-	docker build \
+		docker build \
 		--build-arg BASE_IMAGE=$(BASE_IMAGE) \
 		--build-arg BUILD_DATE=$(BUILD_DATE) \
 		--build-arg DEVELOPER_BUILD=$(DEVELOPER_BUILD) \
