@@ -27,6 +27,7 @@ RUN set -xe; \
         linux-headers \
         mariadb-connector-c-dev \
         mariadb-dev \
+        zlib-dev \
 	readline-dev \
         sqlite-dev \
         libressl-dev \
@@ -52,6 +53,7 @@ RUN set -xe; \
         gnupg \
         linux-headers \
         mariadb-connector-c-dev \
+        zlib-dev \
         mariadb-dev \
 	readline-dev \
         sqlite-dev; \
