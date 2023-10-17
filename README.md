@@ -1,17 +1,14 @@
-# Lobste.rs in a minimal Docker image
-
-[![CircleCI](https://circleci.com/gh/tslilyai/docker-lobsters.svg?style=svg)](https://circleci.com/gh/tslilyai/docker-lobsters) [![Docker Pulls](https://img.shields.io/docker/pulls/tslilyai/lobsters.svg)](https://hub.docker.com/r/tslilyai/lobsters/) [![Docker Stars](https://img.shields.io/docker/stars/tslilyai/lobsters.svg)](https://hub.docker.com/r/tslilyai/lobsters/) [![](https://images.microbadger.com/badges/image/tslilyai/lobsters.svg)](https://microbadger.com/images/tslilyai/lobsters "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/version/tslilyai/lobsters.svg)](https://microbadger.com/images/tslilyai/lobsters "Get your own version badge on microbadger.com")  
-
+# Lobste.rs-Edna
 
 ## About
 
-This repo contains a working example of how to use and deploy [Lobsters][lobsters] within a Docker environment.  
+This repo contains a working example of how to use and deploy [Lobsters][lobsters] within a Docker environment, running with Edna support.
 This image is built off of the official Ruby Docker image ([ruby:2.7-alpine][ruby-alpine])
 
 ## Quick Start
 
 Using this repository.  
-This will serve up Lobsters at http://localhost/
+This will serve up Lobsters at `http://localhost:3000`
 
 ```shell
 git clone git@github.com:tslilyai/docker-lobsters-edna.git
@@ -20,6 +17,15 @@ git submodule update --init --recursive
 make
 docker-compose up
 ```
+
+To generate fake data:
+```
+docker exec -ti docker-lobsters-edna_app_1 /bin/bash
+./bin/rails fake_data
+```
+
+## Use DockerHub
+(Warning: untested)
 
 Using the prebuilt docker hub build and official [MariaDB image][mariadb image].  
 This will serve up Lobsters at http://localhost:3000/
